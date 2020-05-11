@@ -84,6 +84,7 @@ var _ = Describe("Factory", func() {
 		Entry("devices", "devices", true, reflect.TypeOf(resources.NewDeviceSelector([]string{}))),
 		Entry("drivers", "drivers", true, reflect.TypeOf(resources.NewDriverSelector([]string{}))),
 		Entry("pfNames", "pfNames", true, reflect.TypeOf(resources.NewPfNameSelector([]string{}))),
+		Entry("vfDevices", "vfDevices", true, reflect.TypeOf(resources.NewVfDeviceSelector([]string{}))),
 		Entry("linkTypes", "linkTypes", true, reflect.TypeOf(resources.NewLinkTypeSelector([]string{}))),
 		Entry("ddpProfiles", "ddpProfiles", true, reflect.TypeOf(resources.NewDdpSelector([]string{}))),
 		Entry("invalid", "fakeAndInvalid", false, reflect.TypeOf(nil)),

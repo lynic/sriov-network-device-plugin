@@ -159,6 +159,25 @@ func (s *linkTypeSelector) Filter(inDevices []types.PciDevice) []types.PciDevice
 	return filteredList
 }
 
+// NewVfDeviceSelector returns a NetDevSelector interface for netDev list
+func NewVfDeviceSelector(vfDevices []string) types.DeviceSelector {
+	return &vfDeviceSelector{vfDevices: vfDevices}
+}
+
+type vfDeviceSelector struct {
+	vfDevices []string
+}
+
+func (s *vfDeviceSelector) Filter(inDevices []types.PciDevice) []types.PciDevice {
+	filteredList := make([]types.PciDevice, 0)
+	for _, dev := range inDevices {
+		if contains(s.vfDevices, dev.GetPciAddr()) || contains(s.vfDevices, dev.(types.PciNetDevice).GetNetName()) {
+			filteredList = append(filteredList, dev)
+		}
+	}
+	return filteredList
+}
+
 func contains(hay []string, needle string) bool {
 	for _, s := range hay {
 		if s == needle {
